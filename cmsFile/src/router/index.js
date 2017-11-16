@@ -1,15 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
-
+//路由懒加载
+const Index = (resolve) => {
+  import('@/components/index/index').then((module) => {
+    resolve(module)
+  })
+}
 export default new Router({
   routes: [
+    //根路径
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: '/index',
+      component: Index
+    },
+    //首页
+    {
+      path:'/index',
+      component:Index
     }
   ]
 })

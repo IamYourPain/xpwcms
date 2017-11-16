@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+      <!-- 为了某些页面的全屏效果，tab 栏放在各内容页 -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,12 +12,11 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #ebebeb;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: Arial,Helvetica,sans-serif;
 }
 </style>
