@@ -11,12 +11,7 @@ export default {
 }
 </script>
 
-<style>
-body {
-  background-color: #ebebeb;
-}
-
-#app {
-  font-family: Arial,Helvetica,sans-serif;
-}
+<style lang='scss' >
+@import '~@/assets/scss/reset.scss';
+@import '~@/assets/scss/mixin.scss';
 </style>
