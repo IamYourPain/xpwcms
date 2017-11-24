@@ -1,6 +1,15 @@
 //主色调
 $highlight-color: #31a9f7;
-
+//标题颜色
+$title-color:#333;
+//文字颜色
+$txt-color:#58666e;
+//副标题颜色
+$title-sub-color:#909fa5;
+//错误文字颜色
+$txt-error-color:#ff0101;
+//错误边框颜色
+$border-error-color:#e1a4ac;
 // 右边竖向分割线
 @mixin right-bar($right:-8px) {
   margin-right: 10px;
@@ -198,7 +207,7 @@ $highlight-color: #31a9f7;
 // }
 
 //实心小箭头
-@mixin arrow-down($direction: 'down'){
+@mixin arrow-down($direction: 'down',$borderCol:'#fff'){
   //down 箭头向下 top 箭头向上 left箭头向左 right箭头向右
   &:after {
     content:'';
@@ -210,7 +219,7 @@ $highlight-color: #31a9f7;
     font-size: 0;  
     line-height: 0;  
     border-width: 5px;  
-    border-color: #fff;  
+    border-color: $borderCol;  
     border-style: dashed;  
   }
   @if $direction == 'down' {
@@ -267,3 +276,89 @@ $highlight-color: #31a9f7;
     margin:-1px;
   }
 }
+//非实心箭头  direction：箭头方向 borderCol箭头颜色  
+@mixin single-arrow($direction: 'right',$borderCol:#fff){
+  position: relative;
+  &:after {
+    content:'';
+    display: inline-block; 
+    position: absolute;
+    top:50%;
+    right:20px;
+    border-right: 2px solid $borderCol; 
+    border-bottom: 2px solid $borderCol;  
+    width: 6px; 
+    height:6px; 
+    @if $direction == 'right' {
+      transform: rotate(-45deg) translate(0, -50%); 
+    }
+    @if $direction == 'top' {
+      transform: rotate(225deg) translate(0, -50%);
+    }
+    @if $direction == 'down' {
+      transform: rotate(45deg) translate(0, -50%); 
+    }
+    @if $direction == 'left' {
+      transform: rotate(-225deg) translate(0, -50%); 
+    } 
+  }
+}
+//+号
+@mixin plus($boxSize:10px,$w:10px,$h:2px){
+  cursor: pointer;
+  height:$boxSize; 
+  width:$boxSize; 
+  display:inline-block; 
+  position:relative;
+  &:before{
+    content:''; 
+    height:$h; 
+    width:$w; 
+    display:inline-block; 
+    background:$txt-color; 
+    position:absolute; 
+    top:4px; 
+    left:0px;
+  }
+  &:after{
+    content:''; 
+    height:$w; 
+    width:$h; 
+    display:inline-block; 
+    background:$txt-color; 
+    position:absolute; 
+    top:0; 
+    left:4px; 
+  }
+}
+//X号
+@mixin fork($boxSize:10px,$w:10px,$h:2px){
+  cursor: pointer;
+  height:$boxSize; 
+  width:$boxSize; 
+  display:inline-block; 
+  position:relative;
+  &:before{
+    content:'';
+     height:$h; 
+     width:$w; 
+     display:inline-block; 
+     background:$txt-color; 
+     position:absolute; 
+     top:4px; 
+     left:1px; 
+     transform:rotate(-45deg);
+  }
+  &:after{
+    content:'';
+    height:$h; 
+    width:$w; 
+    display:inline-block; 
+    background:$txt-color; 
+    position:absolute; 
+    top:4px; 
+    left:1px; 
+    transform:rotate(45deg);
+  }
+}
+

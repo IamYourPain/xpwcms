@@ -16,6 +16,7 @@
         </template>
         </div>
         <el-menu-item index="1-1">班级管理</el-menu-item>
+        <el-menu-item index="1-2">老师管理</el-menu-item>
       </el-submenu>
        <el-submenu index="2">
         <template slot="title">
@@ -67,7 +68,11 @@ export default {
         for(var i=0;i < elList.length; i++) { 
           elList[i].style ='background-Color:#31a9f7;color:#fff;';
         } 
-    } 
+    },
+    //用来覆盖element-ui组件的focus事件
+    changeFocus(){
+      let el=event.target;
+    }
   }
 };
 </script>
@@ -91,8 +96,15 @@ export default {
       }
     }
     .el-menu-item {
+      position: relative;
       color: #686c6f !important;
     }
+    .el-menu-item:focus, .el-menu-item:hover{
+      background-color: #efefef;
+    }
+     .el-menu-item:focus{
+       @include single-arrow('right',#595d60);
+     }
   }
 }
 //菜单TITLE图标

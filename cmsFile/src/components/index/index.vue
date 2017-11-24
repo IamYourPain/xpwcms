@@ -1,8 +1,16 @@
 <template>
-  <div class='index'>
-      <header-bar></header-bar>
+<div id='contentBox'>
+<header-bar></header-bar>
+<el-container>
+    <el-aside width='200px'>
       <side-bar></side-bar>
-  </div>
+    </el-aside>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
+  </el-container>
+</div>
+  
 </template>
 
 <script>
@@ -29,7 +37,26 @@ export default {
 @import '~@/assets/scss/reset.scss';
 @import '~@/assets/scss/mixin.scss';
 html,body{
-  background-color: #fff;
+  background-color: #f7f7f7;
 }
-
+#contentBox{
+  position: relative;
+  height: 100%;
+}
+.header-bar{
+  position: absolute;
+  left: 0;
+  top:0;
+}
+.el-container{
+  height: 100%;
+  padding-top: 50px;
+  background-color: #f7f7f7;
+  .el-aside{
+    background-color: #fff;
+  }
+  .el-main{
+    padding-top:0;
+  }
+}
 </style>

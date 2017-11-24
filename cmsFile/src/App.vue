@@ -14,4 +14,12 @@ export default {
 <style lang='scss' >
 @import '~@/assets/scss/reset.scss';
 @import '~@/assets/scss/mixin.scss';
+html,body{
+  width: 100%;
+  height: 100%;
+  #app{
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>
