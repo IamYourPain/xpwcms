@@ -6,10 +6,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import Vuex from 'vuex'
+import IScrollView from 'vue-iscroll-view'
+import IScroll from 'iscroll'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Vuex)
+Vue.use(IScrollView, IScroll)
+
 
 /* eslint-disable no-new */
 new Vue({

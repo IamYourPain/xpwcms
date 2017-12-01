@@ -1,0 +1,167 @@
+header{
+  min-width: 800px;
+}
+.el-container {
+  padding-top: 0;
+}
+.content {
+  .part-left {
+    @include child-center("x");
+    flex-grow: 1;
+  }
+  .part-right {
+    @include child-center("x");
+    flex-grow: 1;
+    justify-content: flex-end;
+    .el-dropdown {
+      position: relative;
+      right: -1px;
+      border-right: 0 !important;
+      border-radius: 3px;
+      font-size: 13px;
+      color: $title-sub-color;
+      cursor: default;
+    }
+    input {
+      display: inline-block;
+      box-sizing: border-box;
+      height: 30px;
+      line-height: 30px;
+      box-shadow: none;
+      outline: 0;
+      padding: 5px;
+      border: 1px solid #dcdcdc;
+      color: $txt-color;
+    }
+    .search {
+      position: relative;
+      left: -1px;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      box-sizing: border-box;
+      border-radius: 3px;
+      padding: 0 13px;
+      font-size: 13px;
+      color: $title-sub-color;
+      border: 1px solid #dcdcdc;
+      border-left: 0;
+      cursor: pointer;
+    }
+  }
+  .top-line {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 0px rgba(84, 107, 107, 0.4);
+    padding: 10px 20px;
+    border: 1px solid #d9d9d9;
+    border-top: 0;
+    @include child-center("x");
+    justify-content: space-between;
+    .btn-group {
+      display: inline-block;
+      .icon {
+        padding: 8px;
+        border: 1px solid #dcdcdc;
+        float: left;
+      }
+      .icon_1 {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-position: 3px -38px;
+      }
+      .icon_2 {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background-position: 3px -61px;
+        border-left: 0;
+      }
+    }
+    .el-dropdown {
+      margin-left: 5px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #dcdcdc;
+      box-sizing: border-box;
+      padding: 0 5px;
+    }
+  }
+}
+.el-dropdown-menu {
+  li {
+    padding: 0 5px;
+  }
+}
+.addClassBtn {
+  background-color: #6ebb77;
+  margin-left: 5px;
+  padding: 0 8px;
+  font-size: 14px;
+  line-height: 30px;
+}
+.table-Icon-1 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -106px;
+}
+.table-Icon-2 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -130px;
+}
+.table-Icon-3 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -175px;
+}
+.table-Icon-3.active {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -153px;
+}
+.table-Icon-4 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -85px;
+}
+.table-Icon-5 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -198px;
+}
+.table-Icon-6 {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -198px;
+}
+.table-Icon-7 {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-position: 0 6px;
+}
+.allocation-time {
+  display: inline-block;
+  cursor: pointer;
+  padding: 1px 8px 1px 5px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  span:last-child {
+    position: relative;
+    top: -2px;
+  }
+}
+.el-pagination {
+  display: inline-block;
+  float: right;
+}

@@ -3,21 +3,17 @@
     <el-header>
         <div class='top-line'>
           <div class='part-left'>
-            <div class='btn-group'>
-                <span class='iconBg icon_1 icon'></span>
-                <span class='iconBg icon_2 icon'></span>
-            </div>
             <el-dropdown trigger="click">
                 <span class="el-dropdown-link">
                     全部状态<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>全部状态</el-dropdown-item>
+                    <el-dropdown-item>未开课</el-dropdown-item>
                     <el-dropdown-item>开课中</el-dropdown-item>
                     <el-dropdown-item>已结束</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
-            <el-button class='addClassBtn' type="primary" icon="el-icon-plus">新建班级</el-button>
         </div>
     </div>
     </el-header>
@@ -31,23 +27,9 @@
                 @selection-change="handleSelectionChange">
                 <el-table-column
                   align='center'
-                type="selection"
-                min-width='55'
-                >
-                </el-table-column>
-                <el-table-column
-                  align='center'
                 label="班级名称"
                 >
                 <template  slot-scope="scope" >{{ scope.row.name }}</template>
-                </el-table-column>
-                <el-table-column
-                  align='center'
-                min-width='50'
-                >
-                 <template slot-scope="scope">
-                    <span class='iconBg table-Icon-1'></span>
-                </template>
                 </el-table-column>
                 <el-table-column
                  align='center'
@@ -58,7 +40,7 @@
                 <el-table-column
                  align='center'
                 prop="name"
-                label="授课老师"
+                label="上课老师"
                >
                 </el-table-column>
                  <el-table-column
@@ -87,18 +69,15 @@
                 min-width='160'
                 show-overflow-tooltip>
                 <template slot-scope="scope">
-                    <span class='iconBg table-Icon-2'></span>
                     <span class='iconBg table-Icon-3'></span>
-                    <span class='iconBg table-Icon-4'></span>
                     <div class='allocation-time'>
-                        <span class='iconBg table-Icon-5'></span>
-                        <span>分配时间</span>
+                        <span class='iconBg table-Icon-7'></span>
+                        <span>学员详情</span>
                     </div>
                 </template>
                 </el-table-column>
             </el-table>
         </template>
-         <el-button type="text" @click="open3">点击打开 Message Box</el-button>
     </el-main>
     <el-footer>
         <div class="block">
@@ -136,7 +115,7 @@ export default {
           className: "雅思精品1对11对1"
         },
         {
-          date: "2016-05-02 12:00:00",
+          date: "--",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1519 弄",
           className: "雅思精品1对11对1"
@@ -223,33 +202,6 @@ export default {
     handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
     },
-    open3() {
-        this.$prompt('班级名称', '修改班级名称', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPlaceholder:'班级标题，展示在页面中，请认真填写，最多10个字',
-          inputErrorMessage: '请输入正确的班级名称',
-          inputValidator:(value)=>{
-            let reg=/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_]){1,10}$/;
-              if(!value)
-                return '请填写班级名称'
-              if(reg.test(value))
-                return true;
-              else 
-                return '班级名称可由字母、数字或汉字组成，最长10位';    
-          }
-        }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '你的邮箱是: ' + value
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });       
-        });
-    }
   }
      
 };

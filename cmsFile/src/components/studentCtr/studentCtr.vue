@@ -2,24 +2,23 @@
   <el-container class='content'>
     <el-header>
         <div class='top-line'>
-          <div class='part-left'>
-            <div class='btn-group'>
-                <span class='iconBg icon_1 icon'></span>
-                <span class='iconBg icon_2 icon'></span>
+            <div class='part-right'>
+                <el-dropdown trigger="click" class='fl'>
+                    <span class="el-dropdown-link">
+                        全部<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>全部</el-dropdown-item>
+                        <el-dropdown-item>学生姓名</el-dropdown-item>
+                        <el-dropdown-item>所属班级</el-dropdown-item>
+                        <el-dropdown-item>报名课程</el-dropdown-item>
+                        <el-dropdown-item>授课老师</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <input type="text">
+                <span class='search'>搜索</span>
             </div>
-            <el-dropdown trigger="click">
-                <span class="el-dropdown-link">
-                    全部状态<i class="el-icon-arrow-down el-icon--right"></i>
-                </span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>全部状态</el-dropdown-item>
-                    <el-dropdown-item>开课中</el-dropdown-item>
-                    <el-dropdown-item>已结束</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
-            <el-button class='addClassBtn' type="primary" icon="el-icon-plus">新建班级</el-button>
-        </div>
-    </div>
+         </div>
     </el-header>
     <el-main>
         <template>
@@ -31,55 +30,34 @@
                 @selection-change="handleSelectionChange">
                 <el-table-column
                   align='center'
-                type="selection"
-                min-width='55'
-                >
-                </el-table-column>
-                <el-table-column
-                  align='center'
-                label="班级名称"
+                label="学员姓名"
                 >
                 <template  slot-scope="scope" >{{ scope.row.name }}</template>
                 </el-table-column>
                 <el-table-column
-                  align='center'
-                min-width='50'
-                >
-                 <template slot-scope="scope">
-                    <span class='iconBg table-Icon-1'></span>
-                </template>
-                </el-table-column>
-                <el-table-column
                  align='center'
                 prop="name"
-                label="当前状态"
+                label="所属班级"
                >
                 </el-table-column>
                 <el-table-column
                  align='center'
                 prop="name"
-                label="授课老师"
+                label="报名课程"
                >
                 </el-table-column>
                  <el-table-column
                 min-width='120'
                   align='center'
                 prop="className"
-                label="授课名称"
+                label="授课老师"
                 >
                 </el-table-column>
                  <el-table-column
                   align='center'
                 prop="name"
-                label="班级人数"
+                label="学员电话"
                 >
-                </el-table-column>
-                 <el-table-column
-                align='center'
-                prop="date"
-                label="最近上课时间"
-                 min-width='160'
-               >
                 </el-table-column>
                 <el-table-column
                 align='center'
@@ -87,12 +65,9 @@
                 min-width='160'
                 show-overflow-tooltip>
                 <template slot-scope="scope">
-                    <span class='iconBg table-Icon-2'></span>
-                    <span class='iconBg table-Icon-3'></span>
-                    <span class='iconBg table-Icon-4'></span>
                     <div class='allocation-time'>
-                        <span class='iconBg table-Icon-5'></span>
-                        <span>分配时间</span>
+                        <span class='iconBg table-Icon-7'></span>
+                        <span>学员详情</span>
                     </div>
                 </template>
                 </el-table-column>
@@ -218,40 +193,38 @@ export default {
       return winH - 66;
     },
     handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
+      console.log(`当前页: ${val}`);
     },
     open3() {
-        this.$prompt('班级名称', '修改班级名称', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPlaceholder:'班级标题，展示在页面中，请认真填写，最多10个字',
-          inputErrorMessage: '请输入正确的班级名称',
-          inputValidator:(value)=>{
-            let reg=/^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_]){1,10}$/;
-              if(!value)
-                return '请填写班级名称'
-              if(reg.test(value))
-                return true;
-              else 
-                return '班级名称可由字母、数字或汉字组成，最长10位';    
-          }
-        }).then(({ value }) => {
+      this.$prompt("班级名称", "修改班级名称", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        inputPlaceholder: "班级标题，展示在页面中，请认真填写，最多10个字",
+        inputErrorMessage: "请输入正确的班级名称",
+        inputValidator: value => {
+          let reg = /^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9_]){1,10}$/;
+          if (!value) return "请填写班级名称";
+          if (reg.test(value)) return true;
+          else return "班级名称可由字母、数字或汉字组成，最长10位";
+        }
+      })
+        .then(({ value }) => {
           this.$message({
-            type: 'success',
-            message: '你的邮箱是: ' + value
+            type: "success",
+            message: "你的邮箱是: " + value
           });
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: '取消输入'
-          });       
+            type: "info",
+            message: "取消输入"
+          });
         });
     }
   }
-     
 };
 </script>
 
@@ -260,6 +233,15 @@ export default {
 @import "~@/assets/scss/mixin.scss";
 @import "~@/assets/scss/IconURL.scss";
 @import "~@/assets/scss/ctrPage.scss";
+.part-right{
+    justify-content: flex-start !important;
+}
+.search{
+    margin-left: 15px;
+    background-color: #5dbd73;
+    color: #fff !important;
+    border-color:#5dbd73 !important;
+}
 </style>
 <style lang='scss'>
 //为了覆盖组件的样式
@@ -273,28 +255,27 @@ th {
   border: 1px solid #e6ebf5;
   border-bottom: 0;
 }
-.el-pagination{
-    margin-top:10px;
-    button{
-        border:1px solid #ddd;
-         min-width: 28px;
+.el-pagination {
+  margin-top: 10px;
+  button {
+    border: 1px solid #ddd;
+    min-width: 28px;
+  }
+  ul {
+    li {
+      border: 1px solid #ddd;
+      border-left: 0;
+      color: #078ef7;
+      font-weight: normal;
+      min-width: 28px;
     }
-    ul{
-        li{
-            border:1px solid #ddd;
-            border-left:0;
-            color:#078ef7;
-            font-weight:normal;
-            min-width: 28px;
-        }
-        li:last-child{
-            border-right:0;
-        }
-        li.active{
-            background-color:#078ef7;
-            color:#fff;
-        }
+    li:last-child {
+      border-right: 0;
     }
+    li.active {
+      background-color: #078ef7;
+      color: #fff;
+    }
+  }
 }
 </style>
-

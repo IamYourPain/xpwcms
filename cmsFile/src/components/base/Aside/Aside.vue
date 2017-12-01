@@ -5,16 +5,14 @@
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
-      text-color="#fff"
+      text-color="#58666e"
       @open="handleOpen"
       @close="handleClose">
       <el-submenu index="1">
-        <div slot="title" class='titleColor'>
-           <template>
+           <template slot="title">
             <i class="titleIcon icon_1"></i>
             <span>班级管理</span>
-        </template>
-        </div>
+           </template>
         <el-menu-item index="1-1">班级管理</el-menu-item>
         <el-menu-item index="1-2">老师管理</el-menu-item>
       </el-submenu>
@@ -46,13 +44,78 @@ export default {
   data() {
     return {};
   },
-  mounted(){
-    //获取菜单的TITLE且更换背景色和箭头图标颜色
-      let elList=document.querySelectorAll(".el-submenu__title");
-      for(var i=0;i < elList.length; i++) { 
-        elList[i].onmouseenter=this.changeTitleColor;
-        elList[i].getElementsByTagName("i")[1].style='color:#fff;';
-      } 
+  mounted() {
+    let elList = document.querySelectorAll(".el-submenu__title");
+    for (var i = 0; i < elList.length; i++) {
+      //修改鼠标移入事件,如果这个元素被点击过不添加鼠标移入样式(通过class名active判断)
+      elList[i].onmouseenter = () => {
+        let el = event.target;
+        while (el.className.indexOf("el-submenu__title") == -1) {
+          el = el.parentNode;
+        }
+        if (el.className.indexOf("active") == -1) {
+          el.style =
+            "background-Color:#efefef;height:40px;line-height:40px;color:#58666e;";
+        } else {
+          el.style =
+            "background-Color:#31a9f7;height:40px;line-height:40px;color:#fff;";
+          el.getElementsByTagName("i")[1].style = "color:#fff;";
+        }
+      };
+      //增加菜单点击样式、覆盖默认样式
+      elList[i].onclick = function() {
+        let el = event.target;
+        while (el.className.indexOf("el-submenu__title") == -1) {
+          el = el.parentNode;
+        }
+        //判断当前点击菜单是否激活(class是否包含active)
+        if (el.className.indexOf("active") == -1) {
+          //不包含active增加class名active，并添加点击样式
+          el.className = "el-submenu__title active";
+          el.style =
+            "background-Color:#31a9f7;height:40px;line-height:40px;color:#fff;";
+          el.getElementsByTagName("i")[1].style = "color:#fff;";
+           el.getElementsByTagName("i")[0].style = "background-image:url('../../../../static/sprite_3.png'); ";
+        } else {
+          //包含active去除class名active，并添加未激活样式
+          el.className = "el-submenu__title";
+          el.style =
+            "background-Color:#fff;color:#58666e;height:40px;line-height:40px;";
+          el.getElementsByTagName("i")[1].style = "color:$txt-color;";
+          el.getElementsByTagName("i")[0].style = "background-image:url('../../../../static/sprite_3_gary.png');";
+        }
+      };
+      //element-ui组件带有的事件暂时无法解绑，通过判断class名中是否有active(active已在click事件中添加)加上相对应样式
+      elList[i].onmouseleave = function() {
+        let el = event.target;
+        while (el.className.indexOf("el-submenu__title") == -1) {
+          el = el.parentNode;
+        }
+        if (el.className.indexOf("active") == -1) {
+          el.style =
+            "background-Color:#fff;color:#58666e;height:40px;line-height:40px;";
+          el.getElementsByTagName("i")[1].style = "color:$txt-color;";
+        } else {
+          el.style =
+            "background-Color:#31a9f7;height:40px;line-height:40px;color:#fff;";
+          el.getElementsByTagName("i")[1].style = "color:#fff;";
+        }
+      };
+      elList[i].style =
+        "background-Color:#fff;color:#58666e;height:40px;line-height:40px;";
+      elList[i].getElementsByTagName("i")[1].style = "color:$txt-color;";
+    }
+    //给子菜单添加点击事件
+    let elChildList = document.querySelectorAll(".el-menu-item");
+    for (var j = 0; j < elChildList.length; j++) {
+      elChildList[j].onclick = function() {
+        let elChildListActive = document.querySelectorAll(
+          ".el-menu-item .is-active"
+        );
+        elChildListActive.className = "el-menu-item";
+        event.target.className = "el-menu-item is-active";
+      };
+    }
   },
   components: {},
   methods: {
@@ -61,17 +124,6 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    },
-    //用来覆盖element-ui组件中的默认mouseenter事件
-    changeTitleColor(){
-        let elList=document.querySelectorAll(".el-submenu__title");
-        for(var i=0;i < elList.length; i++) { 
-          elList[i].style ='background-Color:#31a9f7;color:#fff;';
-        } 
-    },
-    //用来覆盖element-ui组件的focus事件
-    changeFocus(){
-      let el=event.target;
     }
   }
 };
@@ -90,43 +142,59 @@ export default {
   .el-menu {
     border: 0;
     li.el-submenu {
-      background-color: #31a9f7;
       i {
         color: #fff;
       }
     }
     .el-menu-item {
+      height: 40px;
+      line-height: 40px;
       position: relative;
       color: #686c6f !important;
+      background-color: #fff;
     }
-    .el-menu-item:focus, .el-menu-item:hover{
+    .el-menu-item:hover {
       background-color: #efefef;
     }
-     .el-menu-item:focus{
-       @include single-arrow('right',#595d60);
-     }
+    .el-menu-item.is-active {
+      background-color: #efefef;
+      @include single-arrow("right",#595d60);
+    }
   }
 }
 //菜单TITLE图标
-.titleIcon{
+.titleIcon {
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
-  background: url('img/sprite_3.png') no-repeat;
-  background-size: 31px 111px;
+  background: url("img/sprite_3_gary.png") no-repeat;
+  background-size: 23px 74px;
   width: 30px;
   height: 30px;
 }
-.icon_1{
-    background-position: -1px 0px;
+.titleColor.gray {
+  .titleIcon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    background: url("img/sprite_3.png") no-repeat;
+    background-size: 23px 74px;
+    width: 30px;
+    height: 30px;
+  }
 }
-.icon_2{
-    background-position: -2px -41px;
-  }
-.icon_3{
-    background-position: -1px -85px;
-  }
+
+.icon_1 {
+  background-position: 3px 5px;
+}
+.icon_2 {
+  background-position: 3px -22px;
+}
+.icon_3 {
+  background-position: 3px -50px;
+}
 </style>
+
 
 
 
