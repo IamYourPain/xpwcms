@@ -8,12 +8,13 @@ import router from './router'
 import Vuex from 'vuex'
 import IScrollView from 'vue-iscroll-view'
 import IScroll from 'iscroll'
+import fullCalendar from 'vue-fullcalendar'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(IScrollView, IScroll)
-
+Vue.component('full-calendar', fullCalendar)
 
 /* eslint-disable no-new */
 new Vue({

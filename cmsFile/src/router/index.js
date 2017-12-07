@@ -64,6 +64,18 @@ const releaseHomework  = (resolve) => {
     resolve(module)
   })
 }
+//学生分配
+const alotStudent  = (resolve) => {
+  import ('@/components/studentCtr/alotStudent/alotStudent').then((module) => {
+    resolve(module)
+  })
+}
+//分配时间
+const allocateTime  = (resolve) => {
+  import ('@/components/classCtr/allocateTime/allocateTime').then((module) => {
+    resolve(module)
+  })
+}
 
 export default new Router({
   routes: [
@@ -77,7 +89,7 @@ export default new Router({
     {
       path: '/index',
       component: Index,
-      redirect: '/releaseHomework',
+      redirect: '/allocateTime',
       children: [{
           //学校管理
           path: '/classctr',
@@ -122,6 +134,16 @@ export default new Router({
           //发布作业
           path: '/releaseHomework',
           component: releaseHomework
+        },
+        {
+          //学生分配
+          path: '/alotStudent',
+          component: alotStudent
+        },
+        {
+          //分配时间
+          path: '/allocateTime',
+          component: allocateTime
         }
       ]
     }
